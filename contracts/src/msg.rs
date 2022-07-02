@@ -4,6 +4,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct InitMsg {
     pub entropy: i32,
+    pub win_table: [i32; 20],
+    pub buyin: i32,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
@@ -23,5 +25,6 @@ pub enum QueryMsg {
 // We define a custom struct for each query response
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct GetWinTableResp {
-    pub win_table: [i32; 11],
+    pub win_table: [i32; 20],
+    pub buyin: i32,
 }

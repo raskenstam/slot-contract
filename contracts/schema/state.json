@@ -3,11 +3,17 @@
   "title": "State",
   "type": "object",
   "required": [
+    "buyin",
     "entropy",
     "owner",
-    "total_started"
+    "total_started",
+    "win_table"
   ],
   "properties": {
+    "buyin": {
+      "type": "integer",
+      "format": "int32"
+    },
     "entropy": {
       "type": "integer",
       "format": "int32"
@@ -18,6 +24,15 @@
     "total_started": {
       "type": "integer",
       "format": "int32"
+    },
+    "win_table": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "maxItems": 20,
+      "minItems": 20
     }
   },
   "definitions": {

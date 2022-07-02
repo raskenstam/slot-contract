@@ -10,7 +10,9 @@ pub static CONFIG_KEY: &[u8] = b"config";
 pub struct State {
     pub owner: CanonicalAddr,
     pub total_started: i32,
-    pub entropy:i32
+    pub entropy: i32,
+    pub win_table: [i32; 20],
+    pub buyin: i32,
 }
 
 pub fn config<S: Storage>(storage: &mut S) -> Singleton<S, State> {

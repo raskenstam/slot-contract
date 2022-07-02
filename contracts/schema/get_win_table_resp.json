@@ -3,17 +3,22 @@
   "title": "GetWinTableResp",
   "type": "object",
   "required": [
+    "buyin",
     "win_table"
   ],
   "properties": {
+    "buyin": {
+      "type": "integer",
+      "format": "int32"
+    },
     "win_table": {
       "type": "array",
       "items": {
         "type": "integer",
         "format": "int32"
       },
-      "maxItems": 11,
-      "minItems": 11
+      "maxItems": 20,
+      "minItems": 20
     }
   }
 }

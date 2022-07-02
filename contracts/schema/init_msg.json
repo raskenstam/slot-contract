@@ -3,12 +3,27 @@
   "title": "InitMsg",
   "type": "object",
   "required": [
-    "entropy"
+    "buyin",
+    "entropy",
+    "win_table"
   ],
   "properties": {
+    "buyin": {
+      "type": "integer",
+      "format": "int32"
+    },
     "entropy": {
       "type": "integer",
       "format": "int32"
+    },
+    "win_table": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "maxItems": 20,
+      "minItems": 20
     }
   }
 }
