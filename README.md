@@ -13,5 +13,8 @@ npm install
 
 > polar test
 
+# how to init new slot 
+
+polar run scripts/instantiate_contract.js 
 
 test-net codeid:10274
