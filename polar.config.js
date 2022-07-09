@@ -1,90 +1,44 @@
 const accounts = [
   {
-    name: 'account_0',
-    address: 'secret1ap26qrlp8mcq2pg6r47w43l0y8zkqm8a450s03',
-    mnemonic: 'grant rice replace explain federal release fix clever romance raise often wild taxi quarter soccer fiber love must tape steak together observe swap guitar'
+    name: "account_0",
+    address: "secret1ap26qrlp8mcq2pg6r47w43l0y8zkqm8a450s03",
+    mnemonic:
+      "grant rice replace explain federal release fix clever romance raise often wild taxi quarter soccer fiber love must tape steak together observe swap guitar",
   },
-  {
-    name: 'account_1',
-    address: 'secret1fc3fzy78ttp0lwuujw7e52rhspxn8uj52zfyne',
-    mnemonic: 'jelly shadow frog dirt dragon use armed praise universe win jungle close inmate rain oil canvas beauty pioneer chef soccer icon dizzy thunder meadow'
-  }
 ];
-const networks = {
-  localnet: {
-    endpoint: 'http://localhost:1317/',
-    accounts: accounts,
-    types: {},
-    fees: {
-      upload: {
-        amount: [{ amount: "500000", denom: "uscrt" }],
-        gas: "2000000",
-      },
-      init: {
-        amount: [{ amount: "125000", denom: "uscrt" }],
-        gas: "500000",
-      },
-    }
-  },
-  // Pulsar-2
-  testnet: {
-    endpoint: 'http://localhost:1317/',
-    accounts: accounts,
-    types: {},
-    fees: {
-      upload: {
-        amount: [{ amount: "500000", denom: "uscrt" }],
-        gas: "2000000",
-      },
-      init: {
-        amount: [{ amount: "125000", denom: "uscrt" }],
-        gas: "500000",
-      },
-    }
-  },
-  development: {
-    endpoint: 'http://localhost:1317/',
-    accounts: accounts,
-    types: {},
-    fees: {
-      upload: {
-        amount: [{ amount: "500000", denom: "uscrt" }],
-        gas: "2000000",
-      },
-      init: {
-        amount: [{ amount: "125000", denom: "uscrt" }],
-        gas: "500000",
-      },
-    }
-  },
-  // Supernova Testnet
-  supernova: {
-    endpoint: 'http://localhost:1317/',
-    accounts: accounts,
-    types: {},
-    fees: {
-      upload: {
-        amount: [{ amount: "500000", denom: "uscrt" }],
-        gas: "2000000",
-      },
-      init: {
-        amount: [{ amount: "125000", denom: "uscrt" }],
-        gas: "500000",
-      },
-    }
-  }
-};
 
 module.exports = {
   networks: {
-    default: networks.testnet,
-    localnet: networks.localnet,
-    development: networks.development
+    default: {
+      endpoint: "https://grpc.pulsar.scrttestnet.com",
+      chainId: "pulsar-2",
+      trustNode: true,
+      keyringBackend: "test",
+      accounts: accounts,
+      types: {},
+      codeId: 1,
+    },
+    /*
+    development: {
+      endpoint: "http://localhost:9091",
+      chainId: "secretdev-1",
+      keyringBackend: "test",
+      accounts: accounts,
+      types: {},
+      codeId: 1,
+    },*/
+    // Holodeck Testnet
+    testnet: {
+      endpoint: "http://bootstrap.secrettestnet.io:26657",
+      chainId: "holodeck-2",
+      trustNode: true,
+      keyringBackend: "test",
+      accounts: accounts,
+      types: {},
+      codeId: 10274,
+    },
   },
   mocha: {
-    timeout: 60000
+    timeout: 60000,
   },
-  rust: {
-    version: "1.55.0",
-  }
 };

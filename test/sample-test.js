@@ -1,24 +1,21 @@
 var assert = require("assert");
-const {
-  Wallet,
-  SecretNetworkClient,
-  MsgSend,
-  MsgMultiSend,
-} = require("secretjs");
+const { Wallet, SecretNetworkClient } = require("secretjs");
 const fs = require("fs");
+const { Contract, getAccountByName } = require("secret-polar");
 describe("contracts", async function () {
+  const contract_owner = getAccountByName("account_0");
+  const contract = new Contract("sample-project");
   let contractAddress;
   let codeHash;
   let secretjs;
   let myAddress;
   async function setup() {
-    let memonic =
-      "grant rice replace explain federal release fix clever romance raise often wild taxi quarter soccer fiber love must tape steak together observe swap guitar";
+    let memonic = contract_owner.account.mnemonic;
     const wallet = new Wallet(memonic);
     myAddress = wallet.address;
     secretjs = await SecretNetworkClient.create({
-      chainId: "secretdev-1",
-      grpcWebUrl: "http://localhost:9091",
+      chainId: contract.env.config.networks.development.chainId,
+      grpcWebUrl: contract.env.config.networks.development.endpoint,
       wallet: wallet,
       walletAddress: myAddress,
     });
@@ -26,9 +23,7 @@ describe("contracts", async function () {
     const tx = await secretjs.tx.compute.storeCode(
       {
         sender: myAddress,
-        wasmByteCode: fs.readFileSync(
-          `/home/stenasd3/slot-contract/artifacts/contracts/sample_project.wasm`
-        ),
+        wasmByteCode: fs.readFileSync(contract.contractPath),
         source: "",
         builder: "",
       },
@@ -45,7 +40,7 @@ describe("contracts", async function () {
     const tx1 = await secretjs.tx.compute.instantiateContract(
       {
         sender: myAddress,
-        codeId: 44,
+        codeId: codeId,
         codeHash: codeHash, // optional but way faster
         initMsg: {
           entropy: 69,
@@ -75,7 +70,7 @@ describe("contracts", async function () {
   before(() => {
     return setup();
   });
-  it("roll", async () => {
+  it("roll with to low buyin", async () => {
     console.log(contractAddress);
     console.log(codeHash);
     let tx = await secretjs.tx.compute.executeContract(
@@ -101,7 +96,7 @@ describe("contracts", async function () {
     );
     assert(tx.arrayLog == undefined);
   }),
-    it("roll2", async () => {
+    it("roll", async () => {
       let tx = await secretjs.tx.compute.executeContract(
         {
           sender: myAddress,
@@ -134,7 +129,7 @@ describe("contracts", async function () {
       });
       assert(quary.win_table && quary.buyin == 250);
     }),
-    it("roll2", async () => {
+    it("terminate", async () => {
       let tx0 = await secretjs.tx.compute.executeContract(
         {
           sender: myAddress,

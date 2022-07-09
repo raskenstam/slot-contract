@@ -1,4 +1,4 @@
-# use on new terminal - export NODE_OPTIONS=--openssl-legacy-provider when runing test with new versions of node
+# use on new terminal - ' export NODE_OPTIONS=--openssl-legacy-provider ' when runing test with new versions of node
 
 # installation
 
@@ -12,3 +12,6 @@ npm install
 # how to test
 
 > polar test
+
+
+test-net codeid:10274
